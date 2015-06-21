@@ -68,3 +68,20 @@ cacheSolve <- function(x, ...) {
   x$setinverse(m)
   m
 }
+
+## a function to show some usage 
+testMatrixCache <- function() {
+
+  NCols = 5
+  NRows = 5
+  myMat <- matrix(runif(NCols*NRows), ncol=NCols) # create a random matrix for testing
+  print('>>>>>>>> The original matrix')
+  print(myMat) # print the myMat content
+  myMatCache <- makeCacheMatrix(myMat) # create the cached matrix
+  print('>>>>>>>> Call the function to get the inverted matrix - 1st time')
+  MyMatInv <- cacheSolve(myMatCache) # solve for inverse (the cache is empty)
+  print(MyMatInv) 
+  print('>>>>>>>> Call the function to get the inverted matrix - 2nd time')
+  cacheSolve(myMatCache) # solve for inverse (any subsequent call will return the cached value)
+  print(MyMatInv) 
+}
